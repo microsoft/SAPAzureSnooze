@@ -1,0 +1,62 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Start SAP Systems",
+    "description": "Used to start SAP Systems via a webhook calling into Azure Automation.",
+    "version": "1.0"
+  },
+  "host": "s1events.azure-automation.net",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/webhooks": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "summary": "Start SAP System",
+        "description": "Call webhook with SID of SAP System to start it.",
+        "operationId": "StartSAPSystem",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sid": {
+                  "type": "string",
+                  "description": "SID",
+                  "title": "",
+                  "x-ms-visibility": ""
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}
