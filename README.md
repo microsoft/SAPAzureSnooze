@@ -1,11 +1,12 @@
 ﻿<p align="left">
 <img width="200" height="40" src="MD%20image/1.png"> 
 </p>  
-<p align="center">
-<h1 align="center" >
-    SAPSnooze PowerApp
-</h1>
-</p>
+  
+
+<div align="center">
+
+# SAPSnooze PowerApp
+</div>
 
 ### **Application Overview:**
 #### **Prerequisites:**
