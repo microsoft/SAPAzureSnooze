@@ -11,7 +11,7 @@
 ### **Application Overview:**
 #### **Prerequisites:**
 1.	Azure automation account
-2.  Windows Hybrid workder (if SAP message server doesn't have a public IP)
+2.  Windows Hybrid worker (if SAP message server doesn't have a public IP)
 3.	Microsoft PowerApps 
 4.	SharePoint List
 
@@ -25,7 +25,7 @@ Following runbooks need to be imported from \Runbooks in your Azure automation a
 2.	Start-SAPSnoozeSystem.ps1 – Runbook to start VMs. Once this runbook is created, create a webhook and capture the URL.
 
 If the message server has a public IP:
-1.	You can use public IP as messageserver host in the SharePointlist. If you're using Public IP, please make sure that the message server http port is allowed in NSG. 
+1.	You can use public IP as messageserver host in the SharePointList. If you're using Public IP, please make sure that the message server http port is allowed in NSG. 
 2.	Import SharePointSDK module in your Azure Automation Account from "Modules gallery"
 3.	Import SAPSnooze module from \Modules in your Azure Automation Account
 4.	You can schedule the runbook to run as an Azure runbook
@@ -65,7 +65,7 @@ All users of the SAPSnooze application should have edit access on the SharePoint
 
 ### **Creating PowerApps application** 
 #### **Create PowerApps Connectors:** 
-1.	Go to PowerApps Studio:[https://preview.create.powerapps.com/studio/#](https://preview.create.powerapps.com/studio/#)
+1.	Go to PowerApps Studio: [https://preview.create.powerapps.com/studio/#](https://preview.create.powerapps.com/studio/#)
 2.	Create a new Connection for SharePoint. 
 3.	Use the credentials of a user who has read and write permissions on the SharePoint List that you’ve created in the above step.
 4.	Create a new custom connector “**Start SAP Systems**” using the json file under /PowerApps/Start-SAP-Systems.swagger.json 
@@ -81,5 +81,5 @@ Once created, edit the application in PowerApps studio
 #### **Permission:** 
 Permission to PowerApps can be given to individual users or using active directory security groups. Please note people who’ve been access to PowerApps application should also be given edit access to the SharePoint list that’s created in the previous step.
 
-> **Note**:This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact **opencode@microsoft.com** with any additional questions or comments.
+> **Note**: This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact **opencode@microsoft.com** with any additional questions or comments.
 
