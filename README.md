@@ -37,14 +37,14 @@ If the message server doesn't have a public IP
 4.	Please schedule the runbook to run on the hybrid worker.
 
 Setup Azure Automation credential for the user that has edit access to the SharePoint list. By default the credential is referenced as below in the runbook. If you name it differently, then please update the runbook as well. 
-SharePoint_<UserName>
+SharePoint_SharePointUserName (replace SharePointUserName with your system account)
 
 The runbook Start-SAPSnoozerunbook requires an Azure automation Run As account which has start VM access the resource groups in scope.
 Please find instructions for setting up Azure automation Run As account here. https://docs.microsoft.com/en-us/azure/automation/manage-runas-account
 
 #### **SharePoint List**
 Create a SharePoint List "SAP System List" with the following properties
-IMPORTANT: Please use the same list name and column names as they're referenced in multiple places in the PowerApps application)
+IMPORTANT: Please use the same list name and column names as they're referenced in multiple places in the PowerApps application
 #### **SharePoint List properties:** 
 A SharePoint list with the following columns needs to be created for maintain system information for PowerApps application. 
 1.	Title (Type: Single line of text) – Title of the application. PowerApps application landing page will group the systems according to their application. 
