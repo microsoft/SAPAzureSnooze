@@ -22,10 +22,10 @@ DateUpdated: 03/25/2017
 Version: 1.2
 
 .PARAMETER SharePointURL
-SharePoint URL name
+SharePoint URL name. E.g. https://microsoft.sharepoint.com/teams/SAPSnooze
 
 .PARAMETER SharePointUserName
-Microsoft account  with edit access on the SharePointlist
+An account with edit access on the SharePointlist. E.g. sapsnooze@microsoft.com
 
 .OUTPUTS
 
@@ -53,12 +53,15 @@ try{
 
     #SharePoint list name should be "SAP System List" for PowerApps to work
     $SharePointListName = "SAP System List"
+
+    #Import SAPSnooze module. This is required only if this is for a hybrid worker
+    Import-Module c:\SAPSnooze\SAPSnooze.psm1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
     
     #Populate sharepoint list
     $PsCred = Get-AutomationPSCredential -Name "SharePoint_${SharePointUserName}"
     $Password = $PsCred.GetNetworkCredential().Password
     $secpasswd = ConvertTo-SecureString $Password -AsPlainText -Force
-    $SharePointCred = New-Object System.Management.Automation.PSCredential ("${SharePointUserName}@microsoft.com", $secpasswd)
+    $SharePointCred = New-Object System.Management.Automation.PSCredential ($SharePointUserName, $secpasswd)
     $ListItems = Get-SPListItem -SiteUrl $SharePointURL -Credential $SharePointCred -IsSharePointOnlineSite $true -ListName $SharePointListName
     $SharePointList = @()
     $ListItems | %{
@@ -99,6 +102,8 @@ try{
         param ($item)
         try{
             $ErrorActionPreference = "Stop"
+            #Import SAPSnooze module. This is required only if this is for a hybrid worker
+            Import-Module c:\SAPSnooze\SAPSnooze.psm1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
             $SID = $item.SID
             $ActiveInstances = Get-SAPSnoozeSAPActiveInstances -SID $SID -MsgServerHost $item.MESSAGESERVERHOST -MsgServerHTTPPort $item.MESSAGESERVERHTTPPORT
             if($ActiveInstances){

@@ -27,7 +27,7 @@ Interal in seconds between monitoring of threads
 Returns the outputs from all threads in an array
 
 .EXAMPLE
-.\Start-ActivityInParallel.ps1 ScriptBlockCopy "{param($ComputerName); get-service -ComputerName $ComputerName}" -ArgumentList @("Server1","Server2") -MaxRunspacePool 2
+.\Start-ParallelJobs.ps1 ScriptBlockCopy "{param($ComputerName); get-service -ComputerName $ComputerName}" -ArgumentList @("Server1","Server2") -MaxRunspacePool 2
 
 Runs the specified script block in parallel with two threads for the specified argument array
 #>

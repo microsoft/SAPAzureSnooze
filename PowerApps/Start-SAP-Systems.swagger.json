@@ -5,7 +5,7 @@
     "description": "Used to start SAP Systems via a webhook calling into Azure Automation.",
     "version": "1.0"
   },
-  "host": "s1events.azure-automation.net",
+  "host": "AzureWebHookHost",
   "basePath": "/",
   "schemes": [
     "https"
