@@ -11,7 +11,7 @@
 ### **Application Overview:**
 #### **Prerequisites:**
 1.	Azure automation account
-2.  	Windows Hybrid worker (if SAP message server doesn't have a public IP)
+2.	Windows Hybrid worker (if SAP message server doesn't have a public IP)
 3.	Microsoft PowerApps 
 4.	SharePoint List
 
@@ -47,24 +47,20 @@ Following runbooks need to be imported from \Runbooks in your Azure automation a
 https://<AzureWebHookHost>/webhooks?token=<token>. Capture the AzureWebHookHost name and the token. Please note if the token has %3d at the end, then replace that with "=")
 
 By default the credential for the user with edit access to the SharePointList is referenced as below in the runbook. If you name it differently, then please update the runbook as well. 
-SharePoint_<UserName> (E.g. SharePoint_sapsnooze@microsoft.com)
+SharePoint_<UserName> (E.g. SharePoint_user@something.com)
 
 If the message server has a public IP:
 1.	You can use public IP as messageserver host in the SharePointlist. If you're using Public IP, please make sure that the message server http port is allowed in NSG. 
 2.	Import SharePointSDK module in your Azure Automation Account from "Modules gallery"
 3.	Import SAPSnooze module from \Modules in your Azure Automation Account
-4.	You can schedule the runbook to run as an Azure runbook. The runbook will require two input parameters. 
-		1) SharePointURL (SharePoint URL that has the 'SAP System List'. E.g. https://microsoft.sharepoint.com/teams/SAPSnooze)
-		2) SharePointUserName (An account with edit access on the SharePointlist. E.g. sapsnooze@microsoft.com)
+4.	You can schedule the runbook to run as an Azure runbook. The runbook will require two input parameters:1) SharePointURL (SharePoint URL that has the 'SAP System List'. E.g. https://microsoft.sharepoint.com/teams/SomeSite) 2) SharePointUserName (An account with edit access on the SharePointlist. E.g. user@something.com)
 
 If the message server doesn't have a public IP
 1.	Please setup a Windows Hybrid Runbook Worker that can access the messageserver host by following the instructions here. https://docs.microsoft.com/en-us/azure/automation/automation-windows-hrw-install
 2.	Install SharePointSDK module on all your Hybrid worker (Install-Module SharePointSDK -Force)
 3.	Import SAPSnooze module from the repo in your Azure Automation Account
 4.	Copy SAPSnooze module from the repo to the directory C:\SAPSnooze on all hybrid workers
-5.	Please schedule the runbook to run on the hybrid worker.
-		1) SharePointURL (SharePoint URL that has the 'SAP System List'. E.g. https://microsoft.sharepoint.com/teams/SAPSnooze)
-		2) SharePointUserName (An account with edit access on the SharePointlist. E.g. sapsnooze@microsoft.com)
+5.	Please schedule the runbook to run on the hybrid worker. The runbook will require two input parameters:1) SharePointURL (SharePoint URL that has the 'SAP System List'. E.g. https://microsoft.sharepoint.com/teams/SomeSite) 2) SharePointUserName (An account with edit access on the SharePointlist. E.g. user@something.com)
 
 The runbook Start-SAPSnoozerunbook requires an Azure automation Run As account which has start VM access the resource groups in scope.
 Please find instructions for setting up Azure automation Run As account here. https://docs.microsoft.com/en-us/azure/automation/manage-runas-account
