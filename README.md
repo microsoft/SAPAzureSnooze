@@ -23,16 +23,16 @@ You can also use it start systems that are stopped in Azure.
 Create a SharePoint List "SAP System List" with the following properties
 IMPORTANT: Please use the same list name and column names as they're referenced in multiple places in the PowerApps application)
 #### **SharePoint List properties:** 
-A SharePoint list with the following columns needs to be created for maintain system information for PowerApps application. 
-1.	Title (Type: Single line of text) – Title of the application. PowerApps application landing page will group the systems according to their application. 
-2.	SID (Type: Single line of text) – SAP System ID 
-3.	ResourceGroupName (Type: Single line of text) – Azure resource group that hosts the virtual machines for the SAP system
-4.	Status (Type: Single line of text) – Status of the SAP system. Allowed values are (Online, Offline, Unknown, Starting) 
-5.	SAPStatus (Type: Single line of text) – Status of the SAP system 
-6.	VMStatus (Type: Single line of text) – Status of virtual machines in Azure
-7.	User (Type: Single line of text) – Email address of the user who started the system 
-8.	MESSAGESERVERHOST (Type: Single line of text) – Message server host name of the SAP system
-10.	MESSAGESERVERHTTPPORT (Type: Single line of text) – Message server HTTP port of the SAP system (81XX) 
+A SharePoint list with the following columns needs to be created for maintain system information for PowerApps application. All columns will be of the type "Single line of text".
+1.	Title – Title of the application. PowerApps application landing page will group the systems according to their application. 
+2.	SID – SAP System ID 
+3.	ResourceGroupName – Azure resource group that hosts the virtual machines for the SAP system
+4.	Status – Status of the SAP system. Allowed values are (Online, Offline, Unknown, Starting) 
+5.	SAPStatus – Status of the SAP system 
+6.	VMStatus – Status of virtual machines in Azure
+7.	User – Email address of the user who started the system 
+8.	MESSAGESERVERHOST – Message server host name of the SAP system
+10.	MESSAGESERVERHTTPPORT – Message server HTTP port of the SAP system (81XX) 
 
 Create the system list by filling in the above properties
 
@@ -44,10 +44,10 @@ All users of the SAPSnooze application should have edit access on the SharePoint
 Following runbooks need to be imported from \Runbooks in your Azure automation account
 1.	Get-SAPSnoozeSystemStatus.ps1 – Runbook to get status of SAP systems. This should be scheduled to run every 15 mins. You will need to create 4 schedules with 1 hour frequency to start at 15 minutes intervals. 
 2.	Start-SAPSnoozeSystem.ps1 – Runbook to start VMs. Once this runbook is created, create a webhook and capture the URL. (The webhook will be of the following format
-https://<AzureWebHookHost>/webhooks?token=<token>. Capture the AzureWebHookHost name and the token. Please note if the token has %3d at the end, then replace that with "=")
+https://"AzureWebHookHost"/webhooks?token="token". Capture the AzureWebHookHost name and the token. Please note if the token has %3d at the end, then replace that with "=")
 
 By default the credential for the user with edit access to the SharePointList is referenced as below in the runbook. If you name it differently, then please update the runbook as well. 
-SharePoint_<UserName> (E.g. SharePoint_user@something.com)
+SharePoint_"UserName" (E.g. SharePoint_user@something.com)
 
 **If the message server has a public IP**
 1.	You can use public IP as messageserver host in the SharePointlist. If you're using Public IP, please make sure that the message server http port is allowed in NSG. 
